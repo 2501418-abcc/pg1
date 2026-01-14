@@ -92,19 +92,20 @@ function displayPayments() {
     payments = JSON.parse(payments);
   }
 
-  payments.forEach(function(p, index) {
+  // 履歴を1件ずつ表示
+  for (let i = 0; i < payments.length; i++) {
+    let p = payments[i];
     let li = document.createElement("li");
 
-    li.innerHTML = `
-      <div>
-        <span>${p.category}：${p.amount}円</span><br>
-        <small>${p.dateTime}</small>
-      </div>
-      <button class="delete-btn" onclick="deletePayment(${index})">削除</button>
-    `;
+    li.innerHTML =
+      "<div>" +
+        "<span>" + p.category + "：" + p.amount + "円</span><br>" +
+        "<small>" + p.dateTime + "</small>" +
+      "</div>" +
+      "<button class='delete-btn' onclick='deletePayment(" + i + ")'>削除</button>";
 
     list.appendChild(li);
-  });
+  }
 
   document.getElementById("count").textContent =
     "件数：" + payments.length + "件";
