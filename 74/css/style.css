@@ -96,3 +96,11 @@ button:active {
     background-color: #ff4c4c;
 }
 
+.footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 100px;
+    color: #555;
+}
