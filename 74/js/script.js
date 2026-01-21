@@ -1,3 +1,10 @@
+let payments = [];
+
+let savedData = localStorage.getItem("payments");
+if (savedData !== null) {
+  payments = JSON.parse(savedData);
+}
+
 // 支出・入金を保存
 function savePayment() {
 
@@ -21,16 +28,6 @@ function savePayment() {
   payment.type = type;
   payment.dateTime = new Date().toLocaleString("ja-JP");
 
-  // 保存されているデータを取り出す
-  let payments = localStorage.getItem("payments");
-
-  // データがなければ空にする
-  if (payments === null) {
-    payments = [];
-  } else {
-    payments = JSON.parse(payments);
-  }
-
   // 新しいデータを追加
   payments.push(payment);
 
@@ -45,6 +42,7 @@ function savePayment() {
   // 画面更新
   displayPayments();
 }
+
 
 // カテゴリー切り替え
 function changeCategory() {
@@ -84,15 +82,6 @@ function displayPayments() {
   let list = document.getElementById("historyList");
   list.innerHTML = "";
 
-  let payments = localStorage.getItem("payments");
-
-  if (payments === null) {
-    payments = [];
-  } else {
-    payments = JSON.parse(payments);
-  }
-
-  // 履歴を1件ずつ表示
   for (let i = 0; i < payments.length; i++) {
     let p = payments[i];
     let li = document.createElement("li");
@@ -111,16 +100,9 @@ function displayPayments() {
     "件数：" + payments.length + "件";
 }
 
+
 // 削除処理
 function deletePayment(index) {
-
-  let payments = localStorage.getItem("payments");
-
-  if (payments === null) {
-    return;
-  }
-
-  payments = JSON.parse(payments);
 
   payments.splice(index, 1);
 
@@ -133,4 +115,5 @@ function deletePayment(index) {
 window.onload = function() {
   displayPayments();
 };
+
 
